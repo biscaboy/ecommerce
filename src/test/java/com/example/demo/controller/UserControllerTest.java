@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.TestUtils;
 import com.example.demo.controllers.UserController;
-import com.example.demo.model.persistence.Cart;
 import com.example.demo.model.persistence.User;
 import com.example.demo.model.persistence.repositories.CartRepository;
 import com.example.demo.model.persistence.repositories.UserRepository;
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.time.Year;
 import java.util.Collections;
 import java.util.List;
 
