@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -13,8 +15,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class SareetaApplication {
 
+	private static final Logger logger = LoggerFactory.getLogger(SareetaApplication.class);
+
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		logger.info("Bean " + BCryptPasswordEncoder.class.getName() + " loading into the application context");
 		return new BCryptPasswordEncoder();
 	}
 
