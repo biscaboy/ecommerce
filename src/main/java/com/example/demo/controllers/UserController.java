@@ -74,7 +74,6 @@ public class UserController {
 		// TODO get the salt and store it
 		// Um Bcrypt does that for us.  See: https://stackoverflow.com/questions/6832445/how-can-bcrypt-have-built-in-salts
 		// TODO maybe implement a different security scheme that requires a salt.
-
 		Cart cart = new Cart();
 		cartRepository.save(cart);
 		user.setCart(cart);
