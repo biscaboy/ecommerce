@@ -19,7 +19,7 @@ public class SareetaApplication {
 
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		logger.info("Bean " + BCryptPasswordEncoder.class.getName() + " loading into the application context");
+		logger.debug("Bean " + BCryptPasswordEncoder.class.getName() + " loading into the application context");
 		return new BCryptPasswordEncoder();
 	}
 
