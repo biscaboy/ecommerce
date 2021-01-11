@@ -24,7 +24,6 @@ public class SareetaApplication {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Adding this line to test Jenkins pipeline.");
 		SpringApplication.run(SareetaApplication.class, args);
 	}
 
