@@ -17,4 +17,10 @@ public class CreateUserRequest {
 	@JsonProperty
 	private String confirmPassword;
 
+	@Override
+	public String toString() {
+		return "CreateUserRequest{" +
+				"username='" + username + '\'' +
+				'}';
+	}
 }
