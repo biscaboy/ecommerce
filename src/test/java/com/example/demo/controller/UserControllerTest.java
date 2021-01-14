@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.eCommerceApplication;
 import com.example.demo.TestUtils;
 import com.example.demo.controllers.UserController;
 import com.example.demo.model.persistence.User;
@@ -9,7 +8,6 @@ import com.example.demo.model.persistence.repositories.UserRepository;
 import com.example.demo.model.requests.CreateUserRequest;
 
 import org.junit.jupiter.api.*;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -21,7 +19,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = eCommerceApplication.class)
 public class UserControllerTest {
 
     private UserController userController;
