@@ -22,7 +22,7 @@ import com.example.demo.model.requests.ModifyCartRequest;
 @RestController
 @RequestMapping("/api/cart")
 public class CartController {
-	
+
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -33,7 +33,7 @@ public class CartController {
 	private ItemRepository itemRepository;
 	
 	@PostMapping("/addToCart")
-	public ResponseEntity<Cart> addTocart(@RequestBody ModifyCartRequest request) {
+	public ResponseEntity<Cart> addToCart(@RequestBody ModifyCartRequest request) {
 		User user = userRepository.findByUsername(request.getUsername());
 		if(user == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -50,7 +50,7 @@ public class CartController {
 	}
 	
 	@PostMapping("/removeFromCart")
-	public ResponseEntity<Cart> removeFromcart(@RequestBody ModifyCartRequest request) {
+	public ResponseEntity<Cart> removeFromCart(@RequestBody ModifyCartRequest request) {
 		User user = userRepository.findByUsername(request.getUsername());
 		if(user == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -60,7 +60,9 @@ public class CartController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		Cart cart = user.getCart();
-		IntStream.range(0, request.getQuantity())
+		// don't remove more items than are in the cart.
+		int qty = (request.getQuantity() <= cart.getItems().size()) ? request.getQuantity() : cart.getItems().size();
+		IntStream.range(0, qty)
 			.forEach(i -> cart.removeItem(item.get()));
 		cartRepository.save(cart);
 		return ResponseEntity.ok(cart);
