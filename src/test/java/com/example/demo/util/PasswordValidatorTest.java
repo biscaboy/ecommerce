@@ -78,6 +78,14 @@ public class PasswordValidatorTest {
     }
 
     @Test
+    @DisplayName("Password has no special character")
+    public void password_has_no_special_character() {
+        String password = "ASEVDIR3asA32";
+        assertFalse(passwordValidator.validate(password, password));
+        assertEquals(passwordValidator.getReasonMessage(), PasswordValidator.REASON_MIN_SPECIAL_CHARS);
+    }
+
+    @Test
     @DisplayName("Passwords do not match")
     public void passwords_do_not_match() {
         String password = "*AVeryFin3Password";

@@ -32,6 +32,7 @@ public class PasswordValidator {
     private static final Pattern REGEX_MIN_LOWERCASE = Pattern.compile("^(?=.*[a-z]).*$");
     private static final Pattern REGEX_MIN_UPPERCASE = Pattern.compile("^(?=.*[A-Z]).*$");
     private static final Pattern REGEX_MIN_LENGTH = Pattern.compile("^.{" + REQUIRED_LENGTH + ",}.*$");
+    private static final Pattern REGEX_MIN_SPECIAL_CHARS = Pattern.compile("^(?=.*[@#!$%^&*+=()_~-]).*$");
     //private static final String REGEX_MIN_TWO_CAPS = "/^(?=.*[A-Z].*[A-Z]).*";
 
     public static final String REASON_NO_MATCH = "The password and confirm password must match. ";
@@ -61,6 +62,9 @@ public class PasswordValidator {
             }
             if (!isValid(password, REGEX_MIN_LENGTH)){
                 reason += REASON_MIN_LENGTH;
+            }
+            if (!isValid(password, REGEX_MIN_SPECIAL_CHARS)){
+                reason += REASON_MIN_SPECIAL_CHARS;
             }
             this.reason = reason;
             return false;
