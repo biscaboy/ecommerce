@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class LogMFTest {
+public class LogMFTests {
 
     @Test
     public void test_format(){

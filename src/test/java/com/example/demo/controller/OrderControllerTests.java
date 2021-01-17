@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class OrderControllerTest {
+public class OrderControllerTests {
 
     private OrderController orderController;
     private UserRepository userRepository = mock(UserRepository.class);
