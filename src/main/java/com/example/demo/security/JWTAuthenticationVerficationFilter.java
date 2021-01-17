@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.example.demo.util.LogMF;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,7 +36,7 @@ public class JWTAuthenticationVerficationFilter extends BasicAuthenticationFilte
             chain.doFilter(req, res);
             return;
         }
-
+        logger.info(LogMF.format("doFilterInternal", "Verifying token presented with request."));
         UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -44,13 +46,17 @@ public class JWTAuthenticationVerficationFilter extends BasicAuthenticationFilte
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest req) {
         String token = req.getHeader(SecurityConstants.HEADER_STRING);
         if (token != null) {
-            String user = JWT.require(HMAC512(SecurityConstants.SECRET.getBytes())).build()
-                    .verify(token.replace(SecurityConstants.TOKEN_PREFIX, ""))
-                    .getSubject();
-            if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+            try {
+                String user = JWT.require(HMAC512(SecurityConstants.SECRET.getBytes())).build()
+                        .verify(token.replace(SecurityConstants.TOKEN_PREFIX, ""))
+                        .getSubject();
+                if (user != null) {
+                    logger.info(LogMF.format("getAuthentication", "Successfully validated token for " + user + "."));
+                    return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+                }
+            } catch (JWTDecodeException decodeException) {
+                logger.info(LogMF.format("getAuthentication", decodeException.getMessage()));
             }
-            return null;
         }
         return null;
     }
