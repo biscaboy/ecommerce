@@ -2,15 +2,12 @@ package com.example.demo.controllers;
 
 import java.util.List;
 
-import com.example.demo.security.JWTTokenFactory;
-import com.example.demo.security.SecurityConstants;
 import com.example.demo.util.LogMF;
 import com.example.demo.util.PasswordValidator;
 import com.example.demo.util.PasswordValidatorFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,14 +23,6 @@ import com.example.demo.model.persistence.User;
 import com.example.demo.model.persistence.repositories.CartRepository;
 import com.example.demo.model.persistence.repositories.UserRepository;
 import com.example.demo.model.requests.CreateUserRequest;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
 @RestController
 @RequestMapping("/api/user")
@@ -50,11 +39,6 @@ public class UserController {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	@GetMapping("/login")
-	public void login() {
-
-	}
 
 	@GetMapping("/id/{id}")
 	public ResponseEntity<User> findById(@PathVariable Long id) {
