@@ -71,9 +71,9 @@ public class eCommerceApplicationTests {
     public void get_user_list_authorized() throws Exception {
 
         CreateUserRequest userRequest = new CreateUserRequest();
-        userRequest.setUsername("AnotherInfoSeeker");
-        userRequest.setPassword("(*&&7898adlkfBEND)");
-        userRequest.setConfirmPassword("(*&&7898adlkfBEND)");
+        userRequest.setUsername("BullDurham");
+        userRequest.setPassword("*)*JJJjkj2343)");
+        userRequest.setConfirmPassword("*)*JJJjkj2343)");
 
         LoginRequest loginRequest = new LoginRequest();
         BeanUtils.copyProperties(userRequest, loginRequest);
