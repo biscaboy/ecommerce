@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //@EntityScan("com.example.demo.model.persistence")
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class eCommerceApplication {
-
+	// TODO fix the problem where the logger loads two libraries for the project.
 	private static final Logger logger = LoggerFactory.getLogger(eCommerceApplication.class);
 
 	@Bean
