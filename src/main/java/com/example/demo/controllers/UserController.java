@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.demo.util.LogMF;
 import com.example.demo.util.PasswordValidator;
@@ -28,7 +29,7 @@ import com.example.demo.model.requests.CreateUserRequest;
 @RequestMapping("/api/user")
 public class UserController {
 
-	Logger log = LoggerFactory.getLogger(UserController.class);
+	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 	PasswordValidator validator = PasswordValidatorFactory.create();
 
 	@Autowired
@@ -42,39 +43,44 @@ public class UserController {
 
 	@GetMapping("/id/{id}")
 	public ResponseEntity<User> findById(@PathVariable Long id) {
-		log.info(LogMF.format("findById","Attempting to find user.", "id", id.toString()));
-		return ResponseEntity.of(userRepository.findById(id));
+		log.debug(LogMF.format("findById","Attempting to find user.", "id", id.toString()));
+		Optional<User> user = userRepository.findById(id);
+		if (user.isEmpty()) {
+			log.debug(LogMF.format("findById", "Invalid user id.", id));
+			return ResponseEntity.badRequest().build();
+		}
+		return ResponseEntity.ok(user.get());
 	}
 	
 	@GetMapping("/{username}")
 	public ResponseEntity<User> findByUserName(@PathVariable String username) throws UsernameNotFoundException {
-		log.info(LogMF.format("findByUserName","Attempting to find user.", "username", username));
+		log.debug(LogMF.format("findByUserName","Attempting to find user.", "username", username));
 		User user = userRepository.findByUsername(username);
 		if (user == null) {
-			log.error(LogMF.format("findByUserName", "Username not found.", "username", username));
+			log.debug(LogMF.format("findByUserName", "Username not found.", "username", username));
 			return ResponseEntity.badRequest().build();
 		}
-		log.info(LogMF.format("findByUserName","Successfully found user.", "username", username));
+		log.debug(LogMF.format("findByUserName","Successfully found user.", "username", username));
 		return ResponseEntity.ok(user);
 	}
 	
 	@PostMapping("/create")
 	public ResponseEntity<User> createUser(@RequestBody CreateUserRequest createUserRequest) {
-		log.info(LogMF.format("createUser","Attempting user create.", createUserRequest));
+		log.debug(LogMF.format("createUser","Attempting user create.", createUserRequest));
 		// query database is the user exists then return exception message
 		User exists = userRepository.findByUsername(createUserRequest.getUsername());
 
 		// does user exist ?
 		if (exists != null){
 			String userExistsErrorMessage = "Username already exists.";
-			log.error(LogMF.format("createUser", userExistsErrorMessage, createUserRequest));
+			log.debug(LogMF.format("createUser", userExistsErrorMessage, createUserRequest));
 			return ResponseEntity.badRequest().build();
 			// throw new UsernameNotFoundException(userExistsErrorMessage);
 		}
 
 		// validate the password here for length, mix of characters and complexity and match of confirmed password
 		if (!validator.validate(createUserRequest.getPassword(), createUserRequest.getConfirmPassword())) {
-			log.error(LogMF.format("createUser", validator.getReasonMessage(), createUserRequest));
+			log.debug(LogMF.format("createUser", validator.getReasonMessage(), createUserRequest));
 			return ResponseEntity.badRequest().build();
 		}
 		User user = new User();
@@ -87,13 +93,13 @@ public class UserController {
 		cartRepository.save(cart);
 		user.setCart(cart);
 		userRepository.save(user);
-		log.info(LogMF.format("createUser","User created successfully.", user));
+		log.debug(LogMF.format("createUser","User created successfully.", user));
 		return ResponseEntity.ok(user);
 	}
 
 	@GetMapping("/list")
 	public ResponseEntity<List<User>> listUsers() {
-		log.info(LogMF.format("findByUserName","Fetching the user list."));
+		log.debug(LogMF.format("findByUserName","Fetching the user list."));
 		return ResponseEntity.ok(userRepository.findAll());
 	}
 }
