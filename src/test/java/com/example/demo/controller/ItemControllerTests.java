@@ -91,7 +91,7 @@ public class ItemControllerTests {
         List<Item> items = new ArrayList<>();
         items.add(item);
 
-        when(itemRepository.findByName(username)).thenReturn(null);
+        when(itemRepository.findByName(username)).thenReturn(new ArrayList<Item>());
 
         ResponseEntity<List<Item>> response = itemController.getItemsByName(username);
         assertNotNull(response);

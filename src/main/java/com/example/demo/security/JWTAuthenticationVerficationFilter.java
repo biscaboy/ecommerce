@@ -55,7 +55,7 @@ public class JWTAuthenticationVerficationFilter extends BasicAuthenticationFilte
                     return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
                 }
             } catch (JWTDecodeException decodeException) {
-                logger.info(LogMF.format("getAuthentication", decodeException.getMessage()));
+                logger.error(LogMF.format("getAuthentication", decodeException.getMessage()));
             }
         }
         return null;

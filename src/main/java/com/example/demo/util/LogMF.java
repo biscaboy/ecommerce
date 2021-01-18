@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Static Util Class LogMF - Log Message Formatter
@@ -26,6 +28,21 @@ public class LogMF {
      * @return
      */
     public static String format(String method, String message, Object obj) {
+       if (obj instanceof List) {
+//           String missing = (String) employeeIds
+//                   .stream()
+//                   .filter( id -> !found.contains(id) )
+//                   .map(String::valueOf)
+//                   .collect(Collectors.joining(", "));
+           String flatList = (String) ((List)obj)
+                   .stream()
+                   .map((pojo) -> {
+                        return format(method, message, pojo);
+                   })
+                   .collect(Collectors.joining("\n"));
+           return flatList;
+       }
+
         return format(method, message, obj.getClass().getName(), copyPojoToMap(obj));
     }
 
@@ -54,22 +71,19 @@ public class LogMF {
 
         String msg;
 
-        msg = "{ 'method' : '" + method + "', " +
-                        "'message': '" + message + "'";
+        msg = "{ \"method\" : \"" + method + "\", " +
+                        "\"message\": \"" + message + "\"";
 
         // TODO can we just call a toString() method to write the object json?
         if (objectType != null && !objectType.isEmpty()) {
-            msg += ", { '" + objectType + "' : {";
+            msg += ", { \"" + objectType + "\" : {";
             int count = 0;
             for (Map.Entry entry : objectValues.entrySet()) {
                 if (count > 0)
                     msg += ", ";
-
-                msg += "'" +
-                        entry.getKey() +
-                        "' : '" +
-                        entry.getValue().toString()
-                        + "'";
+                String key = entry.getKey().toString();
+                String value = (entry.getValue() != null) ? entry.getValue().toString() : "null";
+                msg += "\"" + key + "\" : \"" + value + "\"";
                 count++;
             }
 
@@ -88,18 +102,20 @@ public class LogMF {
      */
     private static Map<String, String> copyPojoToMap(Object pojo){
         Map map = new HashMap<String, String>();
+        if (pojo == null) return map;
         Method[] methods = pojo.getClass().getMethods();
         for (Method method : methods) {
             try {
                 if (method.getName().startsWith("get") &&
                     !method.getName().equals("getClass")) {
-                    Object o = method.invoke(pojo);
                     String name = method.getName().substring(3);
                     name = name.substring(0, 1).toLowerCase() + name.substring(1);
+                    Object o = method.invoke(pojo);
+                    String value = (o != null) ? o.toString() : "null";
                     if (name.toLowerCase().contains("password")) {
                         map.put(name, "***** CONFIDENTIAL *****");
                     } else {
-                        map.put(name, o.toString());
+                        map.put(name, value);
                     }
                 }
             } catch (IllegalAccessException | InvocationTargetException exception) {

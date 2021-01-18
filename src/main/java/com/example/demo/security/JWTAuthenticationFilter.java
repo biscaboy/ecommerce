@@ -52,15 +52,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = ((User) auth.getPrincipal()).getUsername();
         String token = JWTTokenFactory.createFor(username);
         res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
-        logger.info(LogMF.format("successfulAuthentication", "Login succeeded for user " + username + "."));
-        logger.info(LogMF.format("successfulAuthentication", "Successfully returned JWT token."));
-
+        logger.info(LogMF.format("successfulAuthentication", "Login/Token Creation succeeded for user " + username + "."));
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                               AuthenticationException failed) throws IOException, ServletException {
-        logger.error(LogMF.format("unsuccessfulAuthentication", "Incorrect login credentials.  Login failed."));
+        logger.info(LogMF.format("unsuccessfulAuthentication", "Incorrect login credentials.  Login failed."));
         super.unsuccessfulAuthentication(request, response, failed);
     }
 }
