@@ -67,7 +67,7 @@ public class LogMF {
      * @param objectValues
      * @return
      */
-    private static String format(String method, String message, String objectType, Map<String, String> objectValues) {
+    private static String formatJson(String method, String message, String objectType, Map<String, String> objectValues) {
 
         String msg;
 
@@ -93,6 +93,33 @@ public class LogMF {
 
         return msg;
 
+    }
+
+    private static String format(String method, String message, String objectType, Map<String, String> objectValues) {
+
+        String msg;
+        String delim_open = "[";
+        String delim_close= "]";
+
+        msg = "method=" + delim_open + method + delim_close + " " +
+              "message=" + delim_open + message + delim_close;
+
+        if (objectType != null && !objectType.isEmpty()) {
+            msg += " object=" + delim_open + objectType + delim_close;
+            int count = 0;
+            for (Map.Entry entry : objectValues.entrySet()) {
+                if (count == 0)
+                    msg += " ";
+                String key = entry.getKey().toString();
+                String value = (entry.getValue() != null) ? entry.getValue().toString() : "null";
+                msg += key + "=" + delim_open + value + delim_close;
+                count++;
+                if (count != objectValues.size()){
+                    msg += " ";
+                }
+            }
+        }
+        return msg;
     }
 
     /**
