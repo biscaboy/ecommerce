@@ -11,7 +11,9 @@ public class LogMFTests {
     @Test
     public void test_format(){
         String message = LogMF.format("myMethod", "My Message", "MyObject", "My Value");
-        String expected = "{ \"method\" : \"myMethod\", \"message\": \"My Message\", { \"java.lang.String\" : {\"MyObject\" : \"My Value\" } }";
+        String expectedJson = "{ \"method\" : \"myMethod\", \"message\": \"My Message\", { \"java.lang.String\" : {\"MyObject\" : \"My Value\" } }";
+        String expected = "method=[myMethod] message=[My Message] object=[java.lang.String] MyObject=[My Value]";
+
         assertEquals(expected, message);
     }
 
@@ -22,9 +24,12 @@ public class LogMFTests {
         request.setPassword("password");
         request.setConfirmPassword("confirm");
         String message = LogMF.format("myMethod", "My Message", request);
-        String expected = "{ \"method\" : \"myMethod\", \"message\": \"My Message\", " +
-                "{ \"com.example.demo.model.requests.CreateUserRequest\" : " +
-                "{\"password\" : \"***** CONFIDENTIAL *****\", \"confirmPassword\" : \"***** CONFIDENTIAL *****\", \"username\" : \"test\" } }";
+//        String expectedJson = "{ \"method\" : \"myMethod\", \"message\": \"My Message\", " +
+//                "{ \"com.example.demo.model.requests.CreateUserRequest\" : " +
+//                "{\"password\" : \"***** CONFIDENTIAL *****\", \"confirmPassword\" : \"***** CONFIDENTIAL *****\", \"username\" : \"test\" } }";
+        String expected = "method=[myMethod] message=[My Message] " +
+                "object=[com.example.demo.model.requests.CreateUserRequest] " +
+                "password=[***** CONFIDENTIAL *****] confirmPassword=[***** CONFIDENTIAL *****] username=[test]";
         assertEquals(expected, message);
     }
 
@@ -32,7 +37,8 @@ public class LogMFTests {
     @DisplayName("Format a single message")
     public void test_format_single_message() {
         String message = LogMF.format("myMethod", "My Message");
-        String expected = "{ \"method\" : \"myMethod\", \"message\": \"My Message\" }";
+//        String expectedJson = "{ \"method\" : \"myMethod\", \"message\": \"My Message\" }";
+        String expected = "method=[myMethod] message=[My Message]";
         assertEquals(expected, message);
     }
 }
