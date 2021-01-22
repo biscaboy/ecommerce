@@ -9,10 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.persistence.Item;
 import com.example.demo.model.persistence.repositories.ItemRepository;
@@ -43,8 +40,8 @@ public class ItemController {
 		return ResponseEntity.ok(item.get());
 	}
 	
-	@GetMapping("/name/{name}")
-	public ResponseEntity<List<Item>> getItemsByName(@PathVariable String name) {
+	@GetMapping("/name")
+	public ResponseEntity<List<Item>> getItemsByName(@RequestParam String name) {
 		log.debug(LogMF.format("getItemByName", "Attempting to find item by name.", "Item name", name));
 		List<Item> items = itemRepository.findByName(name);
 		if (items.isEmpty()) {
