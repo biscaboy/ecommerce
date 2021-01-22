@@ -8,7 +8,7 @@
 		<version>2.1.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>com.davidjdickinson.udacity</groupId>
 	<artifactId>eCommerceAuthProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>eCommerce-auth-project</name>
@@ -24,7 +24,7 @@
 		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 		<junit.jupiter.version>5.7.0</junit.jupiter.version>
 		<junit.platform.version>1.7.0</junit.platform.version>
-		<start-class>com.example.demo.eCommerceApplication</start-class>
+		<start-class>com.davidjdickinson.udacity.ecommerce.eCommerceApplication</start-class>
 	</properties>
 
 	<dependencyManagement>
