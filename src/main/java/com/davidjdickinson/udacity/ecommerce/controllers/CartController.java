@@ -46,7 +46,7 @@ public class CartController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		Optional<Item> item = itemRepository.findById(request.getItemId());
-		if(item.isEmpty()) {
+		if(!item.isPresent()) {
 			log.debug(LogMF.format("addToCart", "Invalid item id.", request));
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
@@ -67,7 +67,7 @@ public class CartController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		Optional<Item> item = itemRepository.findById(request.getItemId());
-		if(item.isEmpty()) {
+		if(!item.isPresent()) {
 			log.debug(LogMF.format("removeFromCart", "Invalid item id.", request));
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}

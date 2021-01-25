@@ -45,7 +45,7 @@ public class UserController {
 	public ResponseEntity<User> findById(@PathVariable Long id) {
 		log.debug(LogMF.format("findById","Attempting to find user.", "id", id.toString()));
 		Optional<User> user = userRepository.findById(id);
-		if (user.isEmpty()) {
+		if (!user.isPresent()) {
 			log.debug(LogMF.format("findById", "Invalid user id.", id));
 			return ResponseEntity.badRequest().build();
 		}
