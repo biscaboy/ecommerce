@@ -32,7 +32,7 @@ public class ItemController {
 	public ResponseEntity<Item> getItemById(@PathVariable Long id) {
 		log.debug(LogMF.format("getItemById", "Attempting to find item by id.", "Id", id.toString()));
 		Optional<Item> item = itemRepository.findById(id);
-		if (item.isEmpty()){
+		if (!item.isPresent()){
 			log.debug(LogMF.format("getItemById", "Invalid item id.", "Id", id.toString()));
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}

@@ -25,7 +25,7 @@ public class LogMFTests {
         request.setConfirmPassword("confirm");
         String message = LogMF.format("myMethod", "My Message", request);
 //        String expectedJson = "{ \"method\" : \"myMethod\", \"message\": \"My Message\", " +
-//                "{ \"com.example.demo.model.requests.CreateUserRequest\" : " +
+//                "{ \"com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest\" : " +
 //                "{\"password\" : \"***** CONFIDENTIAL *****\", \"confirmPassword\" : \"***** CONFIDENTIAL *****\", \"username\" : \"test\" } }";
         String expected = "method=[myMethod] message=[My Message] " +
                 "object=[com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest] " +

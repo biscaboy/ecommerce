@@ -68,6 +68,8 @@ public class eCommerceApplication {
 	// TODO update pipeline to Jenkins
 	// TODO deploy API to an AWS server
 	// TODO update security constants
+	// TODO fix warnings in build
+	// TODO get item by name add a get with the name as a parameter (backward compatible)
 	private static final Logger logger = LoggerFactory.getLogger(eCommerceApplication.class);
 
 	@Bean
