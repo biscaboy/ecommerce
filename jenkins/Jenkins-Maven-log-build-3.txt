@@ -1,0 +1,216 @@
+Branch indexing
+Connecting to https://api.github.com with no credentials, anonymous access
+Jenkins-Imposed API Limiter: Current quota for Github API usage has 56 remaining (9 under budget). Next quota of 60 in 49 min
+Obtained Jenkinsfile from f92e4760ac55893c6a739ea518c58aae4a82a517
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/eCommerce-build_main
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/biscaboy/ecommerce.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/biscaboy/ecommerce.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.26.2'
+ > git fetch --no-tags --force --progress -- https://github.com/biscaboy/ecommerce.git +refs/heads/main:refs/remotes/origin/main # timeout=10
+Checking out Revision f92e4760ac55893c6a739ea518c58aae4a82a517 (main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f f92e4760ac55893c6a739ea518c58aae4a82a517 # timeout=10
+Commit message: "Edit test properties to run debug"
+ > git rev-list --no-walk fc9c20a6fe217d153fe598a085996eca22d1c763 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] sh
++ docker inspect -f . maven:3-alpine
+.
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container 6b9d70f194967250d453d150cd1c5147d615207766849df62066f3c1d84f2b17
+$ docker run -t -d -u 0:0 -v /root/.m2:/root/.m2 -w /var/jenkins_home/workspace/eCommerce-build_main --volumes-from 6b9d70f194967250d453d150cd1c5147d615207766849df62066f3c1d84f2b17 -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** maven:3-alpine cat
+$ docker top 4a0536becff153f778dece55e6a1f7a2f290fccfd4028edf71b39a714dc91300 -eo pid,comm
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ mvn -B -DskipTests clean package
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building eCommerce-auth-project 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ eCommerceAuthProject ---
+[INFO] Deleting /var/jenkins_home/workspace/eCommerce-build_main/target
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ eCommerceAuthProject ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 2 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ eCommerceAuthProject ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 24 source files to /var/jenkins_home/workspace/eCommerce-build_main/target/classes
+[INFO] /var/jenkins_home/workspace/eCommerce-build_main/src/main/java/com/davidjdickinson/udacity/ecommerce/util/LogMF.java: /var/jenkins_home/workspace/eCommerce-build_main/src/main/java/com/davidjdickinson/udacity/ecommerce/util/LogMF.java uses unchecked or unsafe operations.
+[INFO] /var/jenkins_home/workspace/eCommerce-build_main/src/main/java/com/davidjdickinson/udacity/ecommerce/util/LogMF.java: Recompile with -Xlint:unchecked for details.
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ eCommerceAuthProject ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ eCommerceAuthProject ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 11 source files to /var/jenkins_home/workspace/eCommerce-build_main/target/test-classes
+[INFO] /var/jenkins_home/workspace/eCommerce-build_main/src/test/java/com/davidjdickinson/udacity/ecommerce/controller/ItemControllerTests.java: Some input files use unchecked or unsafe operations.
+[INFO] /var/jenkins_home/workspace/eCommerce-build_main/src/test/java/com/davidjdickinson/udacity/ecommerce/controller/ItemControllerTests.java: Recompile with -Xlint:unchecked for details.
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ eCommerceAuthProject ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-jar-plugin:3.1.2:jar (default-jar) @ eCommerceAuthProject ---
+[INFO] Building jar: /var/jenkins_home/workspace/eCommerce-build_main/target/eCommerceAuthProject-0.0.1-SNAPSHOT.jar
+[INFO]
+[INFO] --- spring-boot-maven-plugin:2.1.5.RELEASE:repackage (repackage) @ eCommerceAuthProject ---
+[INFO] Replacing main artifact with repackaged archive
+[INFO]
+[INFO] --- spring-boot-maven-plugin:2.1.5.RELEASE:repackage (default) @ eCommerceAuthProject ---
+[INFO] Attaching repackaged archive /var/jenkins_home/workspace/eCommerce-build_main/target/eCommerceAuthProject-0.0.1-SNAPSHOT-spring-boot.jar with classifier spring-boot
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 17.665 s
+[INFO] Finished at: 2021-01-26T03:36:27Z
+[INFO] Final Memory: 43M/184M
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
++ mvn test
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building eCommerce-auth-project 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ eCommerceAuthProject ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 2 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ eCommerceAuthProject ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ eCommerceAuthProject ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ eCommerceAuthProject ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ eCommerceAuthProject ---
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.davidjdickinson.udacity.ecommerce.controller.ItemControllerTests
+2021-01-26 03:36:40.194 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.ItemController:33 method=[getItemById] message=[Attempting to find item by id.] object=[java.lang.String] Id=[1]
+2021-01-26 03:36:40.205 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.ItemController:36 method=[getItemById] message=[Invalid item id.] object=[java.lang.String] Id=[1]
+2021-01-26 03:36:40.219 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.ItemController:45 method=[getItemByName] message=[Attempting to find item by name.] object=[java.lang.String] Item name=[BoJackson]
+2021-01-26 03:36:40.220 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.ItemController:51 method=[getItemByName] message=[Success: item found.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.Item] price=[null] name=[null] description=[null] id=[null]
+2021-01-26 03:36:40.225 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.ItemController:45 method=[getItemByName] message=[Attempting to find item by name.] object=[java.lang.String] Item name=[DarrylStraw]
+2021-01-26 03:36:40.225 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.ItemController:48 method=[getItemByName] message=[No items found.] object=[java.lang.String] Item name=[DarrylStraw]
+2021-01-26 03:36:40.228 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.ItemController:33 method=[getItemById] message=[Attempting to find item by id.] object=[java.lang.String] Id=[1]
+2021-01-26 03:36:40.233 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.ItemController:39 method=[getItemById] message=[Success: item found.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.Item] price=[null] name=[null] description=[null] id=[null]
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.253 s - in com.davidjdickinson.udacity.ecommerce.controller.ItemControllerTests
+[INFO] Running com.davidjdickinson.udacity.ecommerce.controller.CartControllerTests
+2021-01-26 03:36:40.567 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:42 method=[addToCart] message=[Adding item(s) to cart.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[1] quantity=[0] username=[test]
+2021-01-26 03:36:40.568 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:50 method=[addToCart] message=[Invalid item id.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[1] quantity=[0] username=[test]
+2021-01-26 03:36:40.731 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:42 method=[addToCart] message=[Adding item(s) to cart.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[1] quantity=[1] username=[testuser]
+2021-01-26 03:36:40.744 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:57 method=[addToCart] message=[Success: item(s) added.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.Item] price=[19.949999999999999289457264239899814128875732421875] name=[Mountain Goat Biscuits - 30 pack] description=[Yummy buttermilk biscuits made from goat milk from the Andes] id=[1]
+2021-01-26 03:36:40.778 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:42 method=[addToCart] message=[Adding item(s) to cart.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[1] quantity=[2] username=[testuser]
+2021-01-26 03:36:40.786 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:57 method=[addToCart] message=[Success: item(s) added.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.Item] price=[19.949999999999999289457264239899814128875732421875] name=[Mountain Goat Biscuits - 30 pack] description=[Yummy buttermilk biscuits made from goat milk from the Andes] id=[1]
+2021-01-26 03:36:40.791 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:42 method=[addToCart] message=[Adding item(s) to cart.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[1] quantity=[10] username=[testuser]
+2021-01-26 03:36:40.793 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:57 method=[addToCart] message=[Success: item(s) added.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.Item] price=[19.949999999999999289457264239899814128875732421875] name=[Mountain Goat Biscuits - 30 pack] description=[Yummy buttermilk biscuits made from goat milk from the Andes] id=[1]
+2021-01-26 03:36:40.800 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:42 method=[addToCart] message=[Adding item(s) to cart.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[0] quantity=[0] username=[test]
+2021-01-26 03:36:40.804 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:45 method=[addToCart] message=[Invalid user id.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[0] quantity=[0] username=[test]
+2021-01-26 03:36:40.813 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:63 method=[removeFromCart] message=[Removing item(s) to cart.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[0] quantity=[0] username=[test]
+2021-01-26 03:36:40.817 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:66 method=[removeFromCart] message=[Invalid user id.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[0] quantity=[0] username=[test]
+2021-01-26 03:36:40.834 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:63 method=[removeFromCart] message=[Removing item(s) to cart.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[1] quantity=[1] username=[test]
+2021-01-26 03:36:40.836 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:80 method=[removeFromCart] message=[Success: item(s) removed.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.Item] price=[3.99] name=[Fisherman's Lip Balm] description=[Keeps even the roughest lips soft.] id=[1]
+2021-01-26 03:36:41.022 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:63 method=[removeFromCart] message=[Removing item(s) to cart.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[1] quantity=[1] username=[testuser]
+2021-01-26 03:36:41.023 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:80 method=[removeFromCart] message=[Success: item(s) removed.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.Item] price=[3.99] name=[Fisherman's Lip Balm] description=[Keeps even the roughest lips soft.] id=[1]
+2021-01-26 03:36:41.027 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:63 method=[removeFromCart] message=[Removing item(s) to cart.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[1] quantity=[2] username=[testuser]
+2021-01-26 03:36:41.034 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:80 method=[removeFromCart] message=[Success: item(s) removed.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.Item] price=[3.99] name=[Fisherman's Lip Balm] description=[Keeps even the roughest lips soft.] id=[1]
+2021-01-26 03:36:41.046 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:63 method=[removeFromCart] message=[Removing item(s) to cart.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[1] quantity=[10] username=[testuser]
+2021-01-26 03:36:41.052 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:80 method=[removeFromCart] message=[Success: item(s) removed.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.Item] price=[3.99] name=[Fisherman's Lip Balm] description=[Keeps even the roughest lips soft.] id=[1]
+2021-01-26 03:36:41.055 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:63 method=[removeFromCart] message=[Removing item(s) to cart.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[1] quantity=[0] username=[test]
+2021-01-26 03:36:41.057 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.CartController:71 method=[removeFromCart] message=[Invalid item id.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest] itemId=[1] quantity=[0] username=[test]
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.722 s - in com.davidjdickinson.udacity.ecommerce.controller.CartControllerTests
+[INFO] Running com.davidjdickinson.udacity.ecommerce.controller.OrderControllerTests
+2021-01-26 03:36:41.220 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.OrderController:50 method=[getOrdersForUser] message=[Attempting to get order.] object=[java.lang.String] username=[null]
+2021-01-26 03:36:41.225 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.OrderController:53 method=[getOrdersForUser] message=[Invalid user id.] object=[java.lang.String] username=[null]
+2021-01-26 03:36:41.236 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.OrderController:36 method=[submit] message=[Attempting create order.] object=[java.lang.String] username=[null]
+2021-01-26 03:36:41.243 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.OrderController:39 method=[submit] message=[Invalid username.] object=[java.lang.String] username=[null]
+2021-01-26 03:36:41.245 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.OrderController:36 method=[submit] message=[Attempting create order.] object=[java.lang.String] username=[MPhelps]
+2021-01-26 03:36:41.246 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.OrderController:44 method=[submit] message=[Success: Order created.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.UserOrder] total=[100] id=[null] items=[[com.davidjdickinson.udacity.ecommerce.model.persistence.Item@20]] user=[User{id=0, username='null'}]
+2021-01-26 03:36:41.258 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.OrderController:50 method=[getOrdersForUser] message=[Attempting to get order.] object=[java.lang.String] username=[JujuBean]
+2021-01-26 03:36:41.259 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.OrderController:60 method=[getOrdersForUser] message=[Success: orders found.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.UserOrder] total=[null] id=[null] items=[null] user=[null]
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.175 s - in com.davidjdickinson.udacity.ecommerce.controller.OrderControllerTests
+[INFO] Running com.davidjdickinson.udacity.ecommerce.controller.UserControllerTests
+2021-01-26 03:36:41.332 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:69 method=[createUser] message=[Attempting user create.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest] password=[***** CONFIDENTIAL *****] confirmPassword=[***** CONFIDENTIAL *****] username=[test]
+2021-01-26 03:36:41.334 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:83 method=[createUser] message=[The password and confirm password must match. ] object=[com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest] password=[***** CONFIDENTIAL *****] confirmPassword=[***** CONFIDENTIAL *****] username=[test]
+2021-01-26 03:36:41.342 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:57 method=[findByUserName] message=[Attempting to find user.] object=[java.lang.String] username=[test]
+2021-01-26 03:36:41.342 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:63 method=[findByUserName] message=[Successfully found user.] object=[java.lang.String] username=[test]
+2021-01-26 03:36:41.351 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:57 method=[findByUserName] message=[Attempting to find user.] object=[java.lang.String] username=[test]
+2021-01-26 03:36:41.352 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:60 method=[findByUserName] message=[Username not found.] object=[java.lang.String] username=[test]
+2021-01-26 03:36:41.354 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:69 method=[createUser] message=[Attempting user create.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest] password=[***** CONFIDENTIAL *****] confirmPassword=[***** CONFIDENTIAL *****] username=[passtest]
+2021-01-26 03:36:41.357 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:96 method=[createUser] message=[User created successfully.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.User] password=[***** CONFIDENTIAL *****] id=[0] cart=[com.davidjdickinson.udacity.ecommerce.model.persistence.Cart@2453f95d] username=[passtest]
+2021-01-26 03:36:41.363 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:69 method=[createUser] message=[Attempting user create.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest] password=[***** CONFIDENTIAL *****] confirmPassword=[***** CONFIDENTIAL *****] username=[badpasstest]
+2021-01-26 03:36:41.364 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:83 method=[createUser] message=[At least one uppercase letter is required. At least one special character [@#!$%^&*+=()_~-] is required.  ] object=[com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest] password=[***** CONFIDENTIAL *****] confirmPassword=[***** CONFIDENTIAL *****] username=[badpasstest]
+2021-01-26 03:36:41.367 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:69 method=[createUser] message=[Attempting user create.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest] password=[***** CONFIDENTIAL *****] confirmPassword=[***** CONFIDENTIAL *****] username=[test]
+2021-01-26 03:36:41.374 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:96 method=[createUser] message=[User created successfully.] object=[com.davidjdickinson.udacity.ecommerce.model.persistence.User] password=[***** CONFIDENTIAL *****] id=[0] cart=[com.davidjdickinson.udacity.ecommerce.model.persistence.Cart@44828f6b] username=[test]
+2021-01-26 03:36:41.377 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:69 method=[createUser] message=[Attempting user create.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest] password=[***** CONFIDENTIAL *****] confirmPassword=[***** CONFIDENTIAL *****] username=[test]
+2021-01-26 03:36:41.377 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:83 method=[createUser] message=[Minimum length is 10 characters. ] object=[com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest] password=[***** CONFIDENTIAL *****] confirmPassword=[***** CONFIDENTIAL *****] username=[test]
+2021-01-26 03:36:41.380 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:102 method=[findByUserName] message=[Fetching the user list.]
+2021-01-26 03:36:41.383 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:69 method=[createUser] message=[Attempting user create.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest] password=[***** CONFIDENTIAL *****] confirmPassword=[***** CONFIDENTIAL *****] username=[test]
+2021-01-26 03:36:41.383 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:76 method=[createUser] message=[Username already exists.] object=[com.davidjdickinson.udacity.ecommerce.model.requests.CreateUserRequest] password=[***** CONFIDENTIAL *****] confirmPassword=[***** CONFIDENTIAL *****] username=[test]
+2021-01-26 03:36:41.391 DEBUG [main] com.davidjdickinson.udacity.ecommerce.controllers.UserController:46 method=[findById] message=[Attempting to find user.] object=[java.lang.String] id=[0]
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.122 s - in com.davidjdickinson.udacity.ecommerce.controller.UserControllerTests
+[INFO] Running com.davidjdickinson.udacity.ecommerce.util.LogMFTests
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s - in com.davidjdickinson.udacity.ecommerce.util.LogMFTests
+[INFO] Running com.davidjdickinson.udacity.ecommerce.util.PasswordValidatorTests
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.09 s - in com.davidjdickinson.udacity.ecommerce.util.PasswordValidatorTests
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 51, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 9.014 s
+[INFO] Finished at: 2021-01-26T03:36:41Z
+[INFO] Final Memory: 20M/48M
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+$ docker stop --time=1 4a0536becff153f778dece55e6a1f7a2f290fccfd4028edf71b39a714dc91300
+$ docker rm -f 4a0536becff153f778dece55e6a1f7a2f290fccfd4028edf71b39a714dc91300
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

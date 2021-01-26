@@ -1,0 +1,160 @@
+Branch indexing
+Connecting to https://api.github.com with no credentials, anonymous access
+Jenkins-Imposed API Limiter: Current quota for Github API usage has 42 remaining (11 under budget). Next quota of 60 in 24 min
+Obtained Jenkinsfile from fc9c20a6fe217d153fe598a085996eca22d1c763
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/eCommerce-build_main
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/biscaboy/ecommerce.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/biscaboy/ecommerce.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.26.2'
+ > git fetch --no-tags --force --progress -- https://github.com/biscaboy/ecommerce.git +refs/heads/main:refs/remotes/origin/main # timeout=10
+Checking out Revision fc9c20a6fe217d153fe598a085996eca22d1c763 (main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f fc9c20a6fe217d153fe598a085996eca22d1c763 # timeout=10
+Commit message: "Add test properties"
+ > git rev-list --no-walk f3dcbade1795998854041f5212c901be8bfa94c4 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] sh
++ docker inspect -f . maven:3-alpine
+.
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container 6b9d70f194967250d453d150cd1c5147d615207766849df62066f3c1d84f2b17
+$ docker run -t -d -u 0:0 -v /root/.m2:/root/.m2 -w /var/jenkins_home/workspace/eCommerce-build_main --volumes-from 6b9d70f194967250d453d150cd1c5147d615207766849df62066f3c1d84f2b17 -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** maven:3-alpine cat
+$ docker top 698aab32e388ba8a3801d269086194c6adc01bd85f43462eb49da191f74293a9 -eo pid,comm
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ mvn -B -DskipTests clean package
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building eCommerce-auth-project 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ eCommerceAuthProject ---
+[INFO] Deleting /var/jenkins_home/workspace/eCommerce-build_main/target
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ eCommerceAuthProject ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 2 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ eCommerceAuthProject ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 24 source files to /var/jenkins_home/workspace/eCommerce-build_main/target/classes
+[INFO] /var/jenkins_home/workspace/eCommerce-build_main/src/main/java/com/davidjdickinson/udacity/ecommerce/util/LogMF.java: /var/jenkins_home/workspace/eCommerce-build_main/src/main/java/com/davidjdickinson/udacity/ecommerce/util/LogMF.java uses unchecked or unsafe operations.
+[INFO] /var/jenkins_home/workspace/eCommerce-build_main/src/main/java/com/davidjdickinson/udacity/ecommerce/util/LogMF.java: Recompile with -Xlint:unchecked for details.
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ eCommerceAuthProject ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ eCommerceAuthProject ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 11 source files to /var/jenkins_home/workspace/eCommerce-build_main/target/test-classes
+[INFO] /var/jenkins_home/workspace/eCommerce-build_main/src/test/java/com/davidjdickinson/udacity/ecommerce/controller/ItemControllerTests.java: Some input files use unchecked or unsafe operations.
+[INFO] /var/jenkins_home/workspace/eCommerce-build_main/src/test/java/com/davidjdickinson/udacity/ecommerce/controller/ItemControllerTests.java: Recompile with -Xlint:unchecked for details.
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ eCommerceAuthProject ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-jar-plugin:3.1.2:jar (default-jar) @ eCommerceAuthProject ---
+[INFO] Building jar: /var/jenkins_home/workspace/eCommerce-build_main/target/eCommerceAuthProject-0.0.1-SNAPSHOT.jar
+[INFO]
+[INFO] --- spring-boot-maven-plugin:2.1.5.RELEASE:repackage (repackage) @ eCommerceAuthProject ---
+[INFO] Replacing main artifact with repackaged archive
+[INFO]
+[INFO] --- spring-boot-maven-plugin:2.1.5.RELEASE:repackage (default) @ eCommerceAuthProject ---
+[INFO] Attaching repackaged archive /var/jenkins_home/workspace/eCommerce-build_main/target/eCommerceAuthProject-0.0.1-SNAPSHOT-spring-boot.jar with classifier spring-boot
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 16.612 s
+[INFO] Finished at: 2021-01-25T23:45:15Z
+[INFO] Final Memory: 41M/135M
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
++ mvn test
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building eCommerce-auth-project 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ eCommerceAuthProject ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 2 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ eCommerceAuthProject ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ eCommerceAuthProject ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ eCommerceAuthProject ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ eCommerceAuthProject ---
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.davidjdickinson.udacity.ecommerce.controller.ItemControllerTests
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.201 s - in com.davidjdickinson.udacity.ecommerce.controller.ItemControllerTests
+[INFO] Running com.davidjdickinson.udacity.ecommerce.controller.CartControllerTests
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.558 s - in com.davidjdickinson.udacity.ecommerce.controller.CartControllerTests
+[INFO] Running com.davidjdickinson.udacity.ecommerce.controller.OrderControllerTests
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.141 s - in com.davidjdickinson.udacity.ecommerce.controller.OrderControllerTests
+[INFO] Running com.davidjdickinson.udacity.ecommerce.controller.UserControllerTests
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.106 s - in com.davidjdickinson.udacity.ecommerce.controller.UserControllerTests
+[INFO] Running com.davidjdickinson.udacity.ecommerce.util.LogMFTests
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s - in com.davidjdickinson.udacity.ecommerce.util.LogMFTests
+[INFO] Running com.davidjdickinson.udacity.ecommerce.util.PasswordValidatorTests
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.071 s - in com.davidjdickinson.udacity.ecommerce.util.PasswordValidatorTests
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 51, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 8.958 s
+[INFO] Finished at: 2021-01-25T23:45:28Z
+[INFO] Final Memory: 20M/48M
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+$ docker stop --time=1 698aab32e388ba8a3801d269086194c6adc01bd85f43462eb49da191f74293a9
+$ docker rm -f 698aab32e388ba8a3801d269086194c6adc01bd85f43462eb49da191f74293a9
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
