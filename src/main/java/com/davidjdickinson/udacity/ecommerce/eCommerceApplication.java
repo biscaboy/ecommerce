@@ -55,7 +55,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * http://maven.apache.org/shared/maven-archiver/examples/classpath.html
  * https://stackoverflow.com/questions/29920434/maven-adding-mainclass-in-pom-xml-with-the-right-folder-path
  * https://www.baeldung.com/executable-jar-with-maven
- *
+ * https://wiki.jenkins.io/display/JENKINS/Builds+failing+with+OutOfMemoryErrors
  */
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
