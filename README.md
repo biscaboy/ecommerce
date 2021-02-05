@@ -4,7 +4,7 @@
 ## Introduction
 This simple eCommerce project requires the student to take an existing Spring REST API application and add the following:
  * Security using Java Web Tokens (JWT)
- * Testing with JUnit at 60% code coverage
+ * Testing with JUnit at 80% code coverage
  * Continuous Integreation/Continuous Deployment (CI/CD) pipline using GitHub, a cloud server (AWS) and Jenkins
  * Reporting and Monitoring of the system using Splunk
     
