@@ -30,7 +30,7 @@ The api runs on `port 8081` by default and can be access on your local device at
 ```
     http://localhost:8081/login
 ```
-#### Submitting requsts to the REST API
+#### Submitting requests to the REST API
 
 To submit requests via POSTMAN, please import [this collection of commands](https://github.com/biscaboy/ecommerce/blob/main/src/test/resources/Ecommerce.postman_collection.json).
 
