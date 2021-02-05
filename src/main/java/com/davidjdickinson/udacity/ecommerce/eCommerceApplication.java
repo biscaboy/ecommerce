@@ -57,20 +57,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * https://stackoverflow.com/questions/29920434/maven-adding-mainclass-in-pom-xml-with-the-right-folder-path
  * https://www.baeldung.com/executable-jar-with-maven
  * https://wiki.jenkins.io/display/JENKINS/Builds+failing+with+OutOfMemoryErrors
+ * https://stackoverflow.com/questions/37671125/how-to-configure-spring-security-to-allow-swagger-url-to-be-accessed-without-aut
  */
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class eCommerceApplication {
-	// TODO update readme with resources
-	// TODO add Postman tests to Test resources
-	// TODO add roles to users (update token, add url for updating roles (admin only), update user object)
-	// TODO add method security
-	// TODO Splunk analysis
-	// TODO update pipeline to Jenkins
-	// TODO deploy API to an AWS server
-	// TODO update security constants
-	// TODO fix warnings in build
-	// TODO get item by name add a get with the name as a parameter (backward compatible)
 	private static final Logger logger = LoggerFactory.getLogger(eCommerceApplication.class);
 
 	@Bean
