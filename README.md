@@ -1,5 +1,113 @@
 # eCommerce Application
+### eCommerce Server - Udacity Java Developer Nano Degree - Project 4
 
+## Introduction
+This simple eCommerce project requires the student to take an existing Spring REST API application and add the following:
+ * Security using Java Web Tokens (JWT)
+ * Testing with JUnit at 60% code coverage
+ * Continuous Integreation/Continuous Deployment (CI/CD) pipline using GitHub, a cloud server (AWS) and Jenkins
+ * Reporting and Monitoring of the system using Splunk
+    
+## For the Code Reviewer
+
+Screenshots of the Jenkins Server running on AWS can be found under the ```/Jenkins-Screenshots``` directory. 
+
+Screenshots of searches, dashboards, alerts and triggered alerts can be found under ```/Splunk-Screenshots```.  
+
+### Building and Running this Project in on the command line
+
+#### To **Build** 
+```
+    ./mvnw clean package
+```    
+#### To **Run**
+```
+    java -jar ./target/eCommerceAuthProject-0.0.1-SNAPSHOT-spring-boot.jar
+```
+### Accessing the API
+
+The api runs on `port 8081` by default and can be access on your local device at: 
+```
+    http://localhost:8081/login
+```
+#### Submitting requsts to the REST API
+
+To submit requests via POSTMAN, please import [this collection of commands](https://github.com/biscaboy/ecommerce/blob/main/src/test/resources/Ecommerce.postman_collection.json).
+
+You may also download, build and execute the [eCommerce API Client](https://github.com/biscaboy/ecommerce-api-client-runner).  This client runs against the server to create log files in real time.  Please see the [readme](https://github.com/biscaboy/ecommerce-api-client-runner/blob/main/README.md) for directions.
+
+#### API Documentation 
+
+The [Swagger UI](http://localhost:8081/swagger-ui.html) has been installed for visualization of the eCommerceAPI.  Also see the [API-Docs](http://localhost:8081/v2/api-docs).
+
+#### API Requsts
+
+##### Create a new user: 
+*Passwords require one uppercase letter, one lowercase letter, one number, one special character and a length of 10 characters to be valid.*
+```
+POST /api/user/create
+{
+    "username": "newUserName",
+    "password": "P@ssw0rd",
+    "confirmPassword": "P@ssw0rd"
+}
+```
+
+##### Login - Token Creation
+Upon successful login an Authorization header will be returned with the Java Web Token to be used for the rest of the session.  Insert this token into the Authorizaiton header of each subsequent request.
+```
+POST /login
+{
+    "username": "newUserName",
+    "password": "P@ssw0rd"
+}
+```
+
+##### Find User by Name
+```
+GET /api/user/<username>
+```
+
+##### Show All Users
+```
+GET /api/user/list
+```
+
+##### Add an Item to the Cart
+Items with ids of 0 and 1 are prepopulated in the database at startup.
+```
+POST /api/cart/addToCart
+{
+    "username" : "<username>",
+    "itemId": 1,
+    "quantity": 1
+}
+```
+
+##### Create an Order from a User's Cart
+```
+POST /api/order/submit/<username>
+```
+
+##### Show Order History
+```
+GET /api/order/history/<username>
+```
+   
+##### List Available Items
+```
+GET /api/item
+```
+
+##### Find Item By Name
+```
+GET /api/item/name/<item name>
+```
+
+# Udacity Instructor's Project Instructions and Requirements
+*The sections below are the instructions that were distributed with [the base code](https://github.com/udacity/nd035-c4-Security-and-DevOps/blob/master/README.md).  They detail what the project entails and what was expected from the student's submission.*  
+
+## Introduction
 In this project, you'll have an opportunity to demonstrate the security and DevOps skills that you learned in this lesson by completing an eCommerce application. You'll start with a template for the complete application, and your goal will be to take this template and add proper authentication and authorization controls so users can only access their data, and that data can only be accessed in a secure way. 
 
 ## Project Template
