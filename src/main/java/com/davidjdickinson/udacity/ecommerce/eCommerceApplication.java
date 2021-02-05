@@ -2,6 +2,7 @@ package com.davidjdickinson.udacity.ecommerce;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -82,4 +83,10 @@ public class eCommerceApplication {
 		SpringApplication.run(eCommerceApplication.class, args);
 	}
 
+
+	@Bean(name="eCommerceServerUrl")
+	public String eCommerceServerUrl (@Value("${server.hostname:localhost}") String host,
+									@Value("${server.port:8081}") String port) {
+		return "http://" + host + ":" + port;
+	}
 }
