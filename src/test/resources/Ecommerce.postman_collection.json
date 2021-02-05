@@ -149,6 +149,45 @@
 			"response": []
 		},
 		{
+			"name": "Find User Unauthorized",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMjczMzkxN30.zVc8BSJCFxdVzt7xLqhmIUF7g7UjGZOAmYszUAHLIKU8_QleUfpLlbTEl8e087cwuUfVDay5efxLOp65fACf0Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/user/Underdog",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"user",
+						"Underdog"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Show All Users",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -356,22 +395,27 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMjE1MjczNX0.PSDGWYSLyzsKddT8hR51Gr2cqUhv0XS2iPdnZaqW7dD91fx8-SzppVd7Hzgws5IsKnmDkzYSEWrGBOa7rja6pw",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMzQyNDQyOH0.9S3JBXKwMVYvxBx0HQiBhac-MmZbwRuZVAvgUmAM9GqJs8aWNgmPZVYzZssk5J3drL9CkIoWg6mnWNPZxiqxnA",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/item/name/Square Widget",
+					"raw": "http://localhost:8081/api/item/name?name=Square Widget",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
 						"api",
 						"item",
-						"name",
-						"Square Widget"
+						"name"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Square Widget"
+						}
 					]
 				}
 			},

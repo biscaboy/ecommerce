@@ -101,7 +101,7 @@ GET /api/item
 
 ##### Find Item By Name
 ```
-GET /api/item/name/<item name>
+GET /api/item/name?<item name>
 ```
 ## Resources
 I'm grateful to these websites and authors who helped me complete this project and learn this subject matter.  I also want to give a shout out to those who curate the [Splunk Enterprise](https://docs.splunk.com/Documentation/Splunk) and [Jenkins Documentation](https://www.jenkins.io/doc/) sites as I found them both very easy to navigate and full of useful examples and tutorials.
