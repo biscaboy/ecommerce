@@ -2,6 +2,7 @@ package com.davidjdickinson.udacity.ecommerce.controller;
 
 import com.davidjdickinson.udacity.ecommerce.TestUtils;
 import com.davidjdickinson.udacity.ecommerce.controllers.UserController;
+import com.davidjdickinson.udacity.ecommerce.exception.InvalidUserIdException;
 import com.davidjdickinson.udacity.ecommerce.exception.PasswordValidationException;
 import com.davidjdickinson.udacity.ecommerce.exception.UsernameExistsException;
 import com.davidjdickinson.udacity.ecommerce.exception.UsernameNotFoundException;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -48,7 +50,7 @@ public class UserControllerTests {
         String password = "B**gieNights3838";
         String hashedPassword = "this*is*a*hashed*password";
 
-        // stubbing example
+
         when(encoder.encode(password)).thenReturn(hashedPassword);
         when(userRepository.findByUsername(username)).thenReturn(null);
 
@@ -131,7 +133,6 @@ public class UserControllerTests {
         String username = "test";
         String password = "passwordIsLong";
 
-        // stubbing example
         when(userRepository.findAll()).thenReturn(Collections.emptyList());
 
         CreateUserRequest request = new CreateUserRequest();
@@ -151,7 +152,6 @@ public class UserControllerTests {
         String password = "passwordIsLong";
         User user1 = new User();
 
-        // stubbing example
         when(userRepository.findByUsername(username)).thenReturn(user1);
 
         CreateUserRequest request = new CreateUserRequest();
@@ -170,7 +170,6 @@ public class UserControllerTests {
         String password = "passwordIsLong";
         User user1 = new User();
 
-        // stubbing example
         when(userRepository.findByUsername(username)).thenReturn(null);
 
         CreateUserRequest request = new CreateUserRequest();
@@ -188,7 +187,7 @@ public class UserControllerTests {
         String password = "passwordIsLong";
         User user1 = new User();
 
-        // stubbing example
+
         when(userRepository.findById(0L)).thenReturn(java.util.Optional.of(user1));
 
         CreateUserRequest request = new CreateUserRequest();
@@ -201,13 +200,29 @@ public class UserControllerTests {
     }
 
     @Test
+    @DisplayName("Fail Get user by id")
+    public void fail_get_user_by_id() throws Exception {
+        String username = "test";
+        String password = "passwordIsLong";
+        User user1 = new User();
+
+        when(userRepository.findById(0L)).thenReturn(Optional.ofNullable(null));
+
+        CreateUserRequest request = new CreateUserRequest();
+        request.setUsername(username);
+        request.setPassword(password);
+        request.setConfirmPassword(password);
+
+        Assertions.assertThrows(InvalidUserIdException.class, () -> {userController.findById(0L);});
+    }
+
+    @Test
     @DisplayName("Create existing user")
     public void create_user_exists() throws Exception {
         String username = "test";
         String password = "B**gieNights3838";
         String hashedPassword = "this*is*a*hashed*password";
 
-        // stubbing example
         when(encoder.encode(password)).thenReturn(hashedPassword);
         when(userRepository.findByUsername(username)).thenReturn(new User());
 

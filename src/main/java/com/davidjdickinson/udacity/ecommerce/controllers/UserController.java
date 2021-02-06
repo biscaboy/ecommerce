@@ -51,7 +51,7 @@ public class UserController {
 		log.debug(LogMF.format("findById","Attempting to find user.", "id", id.toString()));
 		Optional<User> user = userRepository.findById(id);
 		if (!user.isPresent()) {
-			log.debug(LogMF.format("findById", "Invalid user id.", id));
+			log.debug(LogMF.format("findById", "Invalid user id.", "id", id.toString()));
 			throw new InvalidUserIdException();
 		}
 		return ResponseEntity.ok(user.get());
