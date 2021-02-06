@@ -3,6 +3,7 @@ package com.davidjdickinson.udacity.ecommerce.errors;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.davidjdickinson.udacity.ecommerce.exception.InvalidUserIdException;
 import com.davidjdickinson.udacity.ecommerce.exception.PasswordValidationException;
 import com.davidjdickinson.udacity.ecommerce.exception.UsernameExistsException;

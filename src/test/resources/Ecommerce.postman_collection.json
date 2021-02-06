@@ -42,6 +42,150 @@
 			"response": []
 		},
 		{
+			"name": "User Create Failure",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Superdog\",\n    \"password\": \"nouppercase1*\",\n    \"confirmPassword\": \"nouppercase1*\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/user/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"user",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Create Failure All",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Superdog\",\n    \"password\": \"ONLYUPPER\",\n    \"confirmPassword\": \"ONLYUPPER\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/user/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"user",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Create Failure - Existing User",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Underdog\",\n    \"password\": \"Ax3*dkfnei\",\n    \"confirmPassword\": \"Ax3*dkfnei\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/user/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"user",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Create Failure - Missing Confirm",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Superdog\",\n    \"password\": \"Ax3*dkfnei\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/user/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"user",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Login User Bad Password",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
@@ -124,7 +268,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMjczMzkxN30.zVc8BSJCFxdVzt7xLqhmIUF7g7UjGZOAmYszUAHLIKU8_QleUfpLlbTEl8e087cwuUfVDay5efxLOp65fACf0Q",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMzQ5OTYxMH0.1TghS0y8aYyoSY3f9ts6yr1GSzTgeLoChTD-jqSaBbr3EN5pUoPSSmwyHihMT4DQwq1sHITpVGYE0xpzehDA2w",
 						"type": "text"
 					}
 				],
@@ -202,7 +346,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMjczMzkxN30.zVc8BSJCFxdVzt7xLqhmIUF7g7UjGZOAmYszUAHLIKU8_QleUfpLlbTEl8e087cwuUfVDay5efxLOp65fACf0Q",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMzQ5OTYxMH0.1TghS0y8aYyoSY3f9ts6yr1GSzTgeLoChTD-jqSaBbr3EN5pUoPSSmwyHihMT4DQwq1sHITpVGYE0xpzehDA2w",
 						"type": "text"
 					}
 				],
@@ -238,7 +382,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMjczMzkxN30.zVc8BSJCFxdVzt7xLqhmIUF7g7UjGZOAmYszUAHLIKU8_QleUfpLlbTEl8e087cwuUfVDay5efxLOp65fACf0Q",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMzQ5OTYxMH0.1TghS0y8aYyoSY3f9ts6yr1GSzTgeLoChTD-jqSaBbr3EN5pUoPSSmwyHihMT4DQwq1sHITpVGYE0xpzehDA2w",
 						"type": "text"
 					}
 				],
@@ -279,7 +423,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMjczMzkxN30.zVc8BSJCFxdVzt7xLqhmIUF7g7UjGZOAmYszUAHLIKU8_QleUfpLlbTEl8e087cwuUfVDay5efxLOp65fACf0Q",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMzQ5OTYxMH0.1TghS0y8aYyoSY3f9ts6yr1GSzTgeLoChTD-jqSaBbr3EN5pUoPSSmwyHihMT4DQwq1sHITpVGYE0xpzehDA2w",
 						"type": "text"
 					}
 				],
@@ -322,7 +466,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMjczMzkxN30.zVc8BSJCFxdVzt7xLqhmIUF7g7UjGZOAmYszUAHLIKU8_QleUfpLlbTEl8e087cwuUfVDay5efxLOp65fACf0Q",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMzQ5OTYxMH0.1TghS0y8aYyoSY3f9ts6yr1GSzTgeLoChTD-jqSaBbr3EN5pUoPSSmwyHihMT4DQwq1sHITpVGYE0xpzehDA2w",
 						"type": "text"
 					}
 				],
@@ -365,7 +509,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMjczMzkxN30.zVc8BSJCFxdVzt7xLqhmIUF7g7UjGZOAmYszUAHLIKU8_QleUfpLlbTEl8e087cwuUfVDay5efxLOp65fACf0Q",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMzQ5OTYxMH0.1TghS0y8aYyoSY3f9ts6yr1GSzTgeLoChTD-jqSaBbr3EN5pUoPSSmwyHihMT4DQwq1sHITpVGYE0xpzehDA2w",
 						"type": "text"
 					}
 				],
@@ -395,7 +539,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMzQyNDQyOH0.9S3JBXKwMVYvxBx0HQiBhac-MmZbwRuZVAvgUmAM9GqJs8aWNgmPZVYzZssk5J3drL9CkIoWg6mnWNPZxiqxnA",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVbmRlcmRvZyIsImV4cCI6MTYxMzQ5OTYxMH0.1TghS0y8aYyoSY3f9ts6yr1GSzTgeLoChTD-jqSaBbr3EN5pUoPSSmwyHihMT4DQwq1sHITpVGYE0xpzehDA2w",
 						"type": "text"
 					}
 				],

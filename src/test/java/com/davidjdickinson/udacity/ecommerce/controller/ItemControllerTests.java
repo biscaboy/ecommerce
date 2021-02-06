@@ -2,8 +2,11 @@ package com.davidjdickinson.udacity.ecommerce.controller;
 
 import com.davidjdickinson.udacity.ecommerce.controllers.ItemController;
 import com.davidjdickinson.udacity.ecommerce.TestUtils;
+import com.davidjdickinson.udacity.ecommerce.exception.ItemNotFoundException;
+import com.davidjdickinson.udacity.ecommerce.exception.UsernameNotFoundException;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.Item;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.repositories.ItemRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -81,19 +84,16 @@ public class ItemControllerTests {
     }
 
     // attempt lookup with bad name
-    @DisplayName("Lookup item with bad username")
+    @DisplayName("Lookup item with bad item name")
     @Test
-    public void Lookup_item_with_bad_username(){
-        String username = "DarrylStraw";
+    public void Lookup_item_with_bad_item_name(){
+        String username = "Pink t-shirt";
         Item item = new Item();
         List<Item> items = new ArrayList<>();
         items.add(item);
 
         when(itemRepository.findByName(username)).thenReturn(new ArrayList<Item>());
-
-        ResponseEntity<List<Item>> response = itemController.getItemsByName(username);
-        assertNotNull(response);
-        assertEquals(404, response.getStatusCodeValue());
+        Assertions.assertThrows(ItemNotFoundException.class, () -> {itemController.getItemsByName(username);});
     }
 
     // attempt look up with bad id
@@ -104,10 +104,7 @@ public class ItemControllerTests {
         Item item = new Item();
 
         when(itemRepository.findById(id)).thenReturn(Optional.ofNullable(null));
-
-        ResponseEntity<Item> response = itemController.getItemById(id);
-        assertNotNull(response);
-        assertEquals(404, response.getStatusCodeValue());
+        Assertions.assertThrows(ItemNotFoundException.class, () -> {itemController.getItemById(id);});
 
     }
 

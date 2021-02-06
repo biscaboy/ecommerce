@@ -2,6 +2,7 @@ package com.davidjdickinson.udacity.ecommerce.controllers;
 
 import java.util.List;
 
+import com.davidjdickinson.udacity.ecommerce.exception.UsernameNotFoundException;
 import com.davidjdickinson.udacity.ecommerce.util.LogMF;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class OrderController {
 		User user = userRepository.findByUsername(username);
 		if(user == null) {
 			log.debug(LogMF.format("submit", "Invalid username.", "username", username));
-			return ResponseEntity.notFound().build();
+			throw new UsernameNotFoundException();
 		}
 		UserOrder order = UserOrder.createFromCart(user.getCart());
 		orderRepository.save(order);
@@ -50,8 +51,8 @@ public class OrderController {
 		log.debug(LogMF.format("getOrdersForUser", "Attempting to get order.", "username", username));
 		User user = userRepository.findByUsername(username);
 		if(user == null) {
-			log.debug(LogMF.format("getOrdersForUser", "Invalid user id.", "username", username));
-			return ResponseEntity.notFound().build();
+			log.debug(LogMF.format("getOrdersForUser", "Invalid username.", "username", username));
+			throw new UsernameNotFoundException();
 		}
 		List<UserOrder> orders = orderRepository.findByUser(user);
 		if (orders.isEmpty()) {

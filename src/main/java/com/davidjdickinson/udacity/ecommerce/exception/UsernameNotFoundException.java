@@ -7,4 +7,8 @@ public class UsernameNotFoundException extends RuntimeException {
     public UsernameNotFoundException() {
         super(EXCEPTION_MESSAGE);
     }
+
+    public UsernameNotFoundException(String message) {
+        super(message);
+    }
 }

@@ -3,6 +3,8 @@ package com.davidjdickinson.udacity.ecommerce.controllers;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
+import com.davidjdickinson.udacity.ecommerce.exception.ItemNotFoundException;
+import com.davidjdickinson.udacity.ecommerce.exception.UsernameNotFoundException;
 import com.davidjdickinson.udacity.ecommerce.util.LogMF;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,12 +45,12 @@ public class CartController {
 		User user = userRepository.findByUsername(request.getUsername());
 		if(user == null) {
 			log.debug(LogMF.format("addToCart", "Invalid user id.", request));
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			throw new UsernameNotFoundException("User '" + request.getUsername()+ "' does not exist.");
 		}
 		Optional<Item> item = itemRepository.findById(request.getItemId());
 		if(!item.isPresent()) {
 			log.debug(LogMF.format("addToCart", "Invalid item id.", request));
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			throw new ItemNotFoundException("Item id '" + request.getItemId() +"' does not exist.");
 		}
 		Cart cart = user.getCart();
 		IntStream.range(0, request.getQuantity())
@@ -64,12 +66,12 @@ public class CartController {
 		User user = userRepository.findByUsername(request.getUsername());
 		if(user == null) {
 			log.debug(LogMF.format("removeFromCart", "Invalid user id.", request));
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			throw new UsernameNotFoundException("User '" + request.getUsername()+ "' does not exist.");
 		}
 		Optional<Item> item = itemRepository.findById(request.getItemId());
 		if(!item.isPresent()) {
 			log.debug(LogMF.format("removeFromCart", "Invalid item id.", request));
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			throw new ItemNotFoundException("Item id '" + request.getItemId() +"' does not exist.");
 		}
 		Cart cart = user.getCart();
 		// don't remove more items than are in the cart.

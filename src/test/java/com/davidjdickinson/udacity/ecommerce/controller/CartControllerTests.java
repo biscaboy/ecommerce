@@ -1,6 +1,8 @@
 package com.davidjdickinson.udacity.ecommerce.controller;
 
 import com.davidjdickinson.udacity.ecommerce.controllers.CartController;
+import com.davidjdickinson.udacity.ecommerce.exception.ItemNotFoundException;
+import com.davidjdickinson.udacity.ecommerce.exception.UsernameNotFoundException;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.repositories.CartRepository;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.repositories.UserRepository;
 import com.davidjdickinson.udacity.ecommerce.TestUtils;
@@ -9,6 +11,7 @@ import com.davidjdickinson.udacity.ecommerce.model.persistence.Item;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.User;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.repositories.ItemRepository;
 import com.davidjdickinson.udacity.ecommerce.model.requests.ModifyCartRequest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -163,14 +166,7 @@ public class CartControllerTests {
         ModifyCartRequest request = new ModifyCartRequest();
         request.setUsername("test");
         when(userRepository.findByUsername(request.getUsername())).thenReturn(null);
-
-        ResponseEntity<Cart> response = cartController.addToCart(request);
-
-        assertNotNull(response);
-        assertEquals(404, response.getStatusCodeValue());
-
-        Cart returnedCart = response.getBody();
-        assertNull(returnedCart);
+        Assertions.assertThrows(UsernameNotFoundException.class, () -> {cartController.addToCart(request);});
     }
 
     @Test
@@ -179,14 +175,7 @@ public class CartControllerTests {
         ModifyCartRequest request = new ModifyCartRequest();
         request.setUsername("test");
         when(userRepository.findByUsername(request.getUsername())).thenReturn(null);
-
-        ResponseEntity<Cart> response = cartController.removeFromCart(request);
-
-        assertNotNull(response);
-        assertEquals(404, response.getStatusCodeValue());
-
-        Cart returnedCart = response.getBody();
-        assertNull(returnedCart);
+        Assertions.assertThrows(UsernameNotFoundException.class, () -> {cartController.removeFromCart(request);});
     }
 
     @Test
@@ -198,13 +187,7 @@ public class CartControllerTests {
         when(userRepository.findByUsername(request.getUsername())).thenReturn(new User());
         when(itemRepository.findById(request.getItemId())).thenReturn(Optional.ofNullable(null));
 
-        ResponseEntity<Cart> response = cartController.addToCart(request);
-
-        assertNotNull(response);
-        assertEquals(404, response.getStatusCodeValue());
-
-        Cart returnedCart = response.getBody();
-        assertNull(returnedCart);
+        Assertions.assertThrows(ItemNotFoundException.class, () -> {cartController.addToCart(request);});
     }
 
     @Test
@@ -215,14 +198,7 @@ public class CartControllerTests {
         request.setItemId(1L);
         when(userRepository.findByUsername(request.getUsername())).thenReturn(new User());
         when(itemRepository.findById(request.getItemId())).thenReturn(Optional.ofNullable(null));
-
-        ResponseEntity<Cart> response = cartController.removeFromCart(request);
-
-        assertNotNull(response);
-        assertEquals(404, response.getStatusCodeValue());
-
-        Cart returnedCart = response.getBody();
-        assertNull(returnedCart);
+        Assertions.assertThrows(ItemNotFoundException.class, () -> {cartController.removeFromCart(request);});
     }
 
     @Test

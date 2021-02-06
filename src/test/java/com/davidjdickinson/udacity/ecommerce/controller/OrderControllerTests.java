@@ -1,6 +1,7 @@
 package com.davidjdickinson.udacity.ecommerce.controller;
 
 import com.davidjdickinson.udacity.ecommerce.controllers.OrderController;
+import com.davidjdickinson.udacity.ecommerce.exception.UsernameNotFoundException;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.Cart;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.Item;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.User;
@@ -8,6 +9,7 @@ import com.davidjdickinson.udacity.ecommerce.model.persistence.repositories.Orde
 import com.davidjdickinson.udacity.ecommerce.model.persistence.repositories.UserRepository;
 import com.davidjdickinson.udacity.ecommerce.TestUtils;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.UserOrder;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -110,9 +112,7 @@ public class OrderControllerTests {
     public void fail_to_create_order_bad_username(String username) {
         when(userRepository.findByUsername(username)).thenReturn(null);
 
-        ResponseEntity<UserOrder> response = orderController.submit(username);
-        assertNotNull(response);
-        assertEquals(404, response.getStatusCodeValue());
+        Assertions.assertThrows(UsernameNotFoundException.class, () -> {orderController.submit(username);});
     }
 
     // fail to get list by submitting a bad username
@@ -121,9 +121,6 @@ public class OrderControllerTests {
     @NullSource
     public void fail_to_get_orders_bad_username(String username) {
         when(userRepository.findByUsername(username)).thenReturn(null);
-
-        ResponseEntity<List<UserOrder>> response = orderController.getOrdersForUser(username);
-        assertNotNull(response);
-        assertEquals(404, response.getStatusCodeValue());
+        Assertions.assertThrows(UsernameNotFoundException.class, () -> {orderController.getOrdersForUser(username);});
     }
 }

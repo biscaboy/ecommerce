@@ -3,6 +3,7 @@ package com.davidjdickinson.udacity.ecommerce.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import com.davidjdickinson.udacity.ecommerce.exception.ItemNotFoundException;
 import com.davidjdickinson.udacity.ecommerce.util.LogMF;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public class ItemController {
 		Optional<Item> item = itemRepository.findById(id);
 		if (!item.isPresent()){
 			log.debug(LogMF.format("getItemById", "Invalid item id.", "Id", id.toString()));
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			throw new ItemNotFoundException("Invalid item id: " + id);
 		}
 		log.debug(LogMF.format("getItemById", "Success: item found.", item.get()));
 		return ResponseEntity.ok(item.get());
@@ -46,7 +47,7 @@ public class ItemController {
 		List<Item> items = itemRepository.findByName(name);
 		if (items.isEmpty()) {
 			log.debug(LogMF.format("getItemByName", "No items found.", "Item name", name));
-			return ResponseEntity.notFound().build();
+			throw new ItemNotFoundException("No items found with name '" + name + "'");
 		} else {
 			log.debug(LogMF.format("getItemByName", "Success: item found.", items));
 			return ResponseEntity.ok(items);
