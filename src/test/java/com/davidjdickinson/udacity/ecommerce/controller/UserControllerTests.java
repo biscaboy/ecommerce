@@ -2,6 +2,9 @@ package com.davidjdickinson.udacity.ecommerce.controller;
 
 import com.davidjdickinson.udacity.ecommerce.TestUtils;
 import com.davidjdickinson.udacity.ecommerce.controllers.UserController;
+import com.davidjdickinson.udacity.ecommerce.exception.PasswordValidationException;
+import com.davidjdickinson.udacity.ecommerce.exception.UsernameExistsException;
+import com.davidjdickinson.udacity.ecommerce.exception.UsernameNotFoundException;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.User;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.repositories.CartRepository;
 import com.davidjdickinson.udacity.ecommerce.model.persistence.repositories.UserRepository;
@@ -77,8 +80,7 @@ public class UserControllerTests {
         request.setUsername(username);
         request.setPassword(password);
         request.setConfirmPassword(password);
-        ResponseEntity<User> response = userController.createUser(request);
-        assertEquals(400, response.getStatusCodeValue());
+        Assertions.assertThrows(PasswordValidationException.class, () -> { userController.createUser(request); });
     }
 
     @Test
@@ -91,9 +93,7 @@ public class UserControllerTests {
         request.setUsername(username);
         request.setPassword(password);
         request.setConfirmPassword(confirmPassword);
-        ResponseEntity<User> response = userController.createUser(request);
-        assertEquals(400, response.getStatusCodeValue());
-
+        Assertions.assertThrows(PasswordValidationException.class, () -> { userController.createUser(request); });
     }
 
     @Test
@@ -122,8 +122,7 @@ public class UserControllerTests {
         request.setUsername(username);
         request.setPassword(password);
         request.setConfirmPassword(confirmPassword);
-        ResponseEntity<User> response = userController.createUser(request);
-        assertEquals(400, response.getStatusCodeValue());
+        Assertions.assertThrows(PasswordValidationException.class, () -> { userController.createUser(request); });
     }
 
     @Test
@@ -179,8 +178,7 @@ public class UserControllerTests {
         request.setPassword(password);
         request.setConfirmPassword(password);
 
-        ResponseEntity<User> response = userController.findByUserName(username);
-        assertEquals(400, response.getStatusCodeValue());
+        Assertions.assertThrows(UsernameNotFoundException.class, () -> { userController.findByUserName(username); });
     }
 
     @Test
@@ -218,8 +216,7 @@ public class UserControllerTests {
         request.setPassword(password);
         request.setConfirmPassword(password);
 
-        final ResponseEntity<User> response = userController.createUser(request);
-        assertEquals(400, response.getStatusCodeValue());
+        Assertions.assertThrows(UsernameExistsException.class, () -> { userController.createUser(request); });
 
     }
 }
