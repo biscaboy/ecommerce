@@ -28,25 +28,25 @@ public class ErrorController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(PasswordValidationException.class)
     public final ResponseEntity<Object> handlePasswordValidationException(PasswordValidationException ex, WebRequest request) {
-        logger.error(LogMF.format("handlePasswordValidationException", ex.getLocalizedMessage()));
+        logger.error(LogMF.format("handlePasswordValidationException", ex.getLocalizedMessage(), ex));
         return handleExceptionMessageOnly(ex, request);
     }
 
     @ExceptionHandler(UsernameExistsException.class)
     public final ResponseEntity<Object> handleUsernameExistsException(UsernameExistsException ex, WebRequest request) {
-        logger.error(LogMF.format("handleUsernameExistsException", ex.getLocalizedMessage()));
+        logger.error(LogMF.format("handleUsernameExistsException", ex.getLocalizedMessage(), ex));
         return handleExceptionMessageOnly(ex, request);
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
     public final ResponseEntity<Object> handleUsernameNotFoundException(UsernameNotFoundException ex, WebRequest request) {
-        logger.error(LogMF.format("handleUsernameNotFoundException", ex.getLocalizedMessage()));
+        logger.error(LogMF.format("handleUsernameNotFoundException", ex.getLocalizedMessage(), ex));
         return handleExceptionMessageOnly(ex, request);
     }
 
     @ExceptionHandler(InvalidUserIdException.class)
     public final ResponseEntity<Object> handleInvalidUserIdException(InvalidUserIdException ex, WebRequest request) {
-        logger.error(LogMF.format("handleInvalidUserIdException", ex.getLocalizedMessage()));
+        logger.error(LogMF.format("handleInvalidUserIdException", ex.getLocalizedMessage(), ex));
         return handleExceptionMessageOnly(ex, request);
     }
 

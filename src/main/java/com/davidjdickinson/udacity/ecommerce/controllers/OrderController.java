@@ -37,8 +37,9 @@ public class OrderController {
 		log.debug(LogMF.format("submit", "Attempting create order.", "username", username));
 		User user = userRepository.findByUsername(username);
 		if(user == null) {
-			log.debug(LogMF.format("submit", "Invalid username.", "username", username));
-			throw new UsernameNotFoundException();
+			String msg = "Order create failed: username not found.";
+			log.debug(LogMF.format("submit", msg, "username", username));
+			throw new UsernameNotFoundException(msg);
 		}
 		UserOrder order = UserOrder.createFromCart(user.getCart());
 		orderRepository.save(order);
