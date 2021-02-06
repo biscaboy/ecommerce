@@ -8,6 +8,7 @@ import com.davidjdickinson.udacity.ecommerce.exception.InvalidUserIdException;
 import com.davidjdickinson.udacity.ecommerce.exception.PasswordValidationException;
 import com.davidjdickinson.udacity.ecommerce.exception.UsernameExistsException;
 import com.davidjdickinson.udacity.ecommerce.exception.UsernameNotFoundException;
+import com.davidjdickinson.udacity.ecommerce.util.LogMF;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,21 +28,25 @@ public class ErrorController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(PasswordValidationException.class)
     public final ResponseEntity<Object> handlePasswordValidationException(PasswordValidationException ex, WebRequest request) {
+        logger.error(LogMF.format("handlePasswordValidationException", ex.getLocalizedMessage()));
         return handleExceptionMessageOnly(ex, request);
     }
 
     @ExceptionHandler(UsernameExistsException.class)
     public final ResponseEntity<Object> handleUsernameExistsException(UsernameExistsException ex, WebRequest request) {
+        logger.error(LogMF.format("handleUsernameExistsException", ex.getLocalizedMessage()));
         return handleExceptionMessageOnly(ex, request);
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
-    public final ResponseEntity<Object> handleUsernameExistsException(UsernameNotFoundException ex, WebRequest request) {
+    public final ResponseEntity<Object> handleUsernameNotFoundException(UsernameNotFoundException ex, WebRequest request) {
+        logger.error(LogMF.format("handleUsernameNotFoundException", ex.getLocalizedMessage()));
         return handleExceptionMessageOnly(ex, request);
     }
 
     @ExceptionHandler(InvalidUserIdException.class)
-    public final ResponseEntity<Object> handleUsernameExistsException(InvalidUserIdException ex, WebRequest request) {
+    public final ResponseEntity<Object> handleInvalidUserIdException(InvalidUserIdException ex, WebRequest request) {
+        logger.error(LogMF.format("handleInvalidUserIdException", ex.getLocalizedMessage()));
         return handleExceptionMessageOnly(ex, request);
     }
 
@@ -62,6 +67,11 @@ public class ErrorController extends ResponseEntityExceptionHandler {
                         Collectors.toList());
 
         ApiError apiError = new ApiError(DEFAULT_VALIDATION_FAILED_MESSAGE, errors);
+        logger.error(LogMF.format("handleMethodArgumentNotValid",
+                apiError.getErrors()
+                        .stream()
+                        .map((message) -> {return String.valueOf(message);})
+                        .collect(Collectors.joining(","))));
         return handleExceptionInternal(ex, apiError, headers, HttpStatus.BAD_REQUEST, request);
     }
 }

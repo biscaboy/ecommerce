@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.davidjdickinson.udacity.ecommerce.util.LogMF;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -56,6 +57,8 @@ public class JWTAuthenticationVerficationFilter extends BasicAuthenticationFilte
                 }
             } catch (JWTDecodeException decodeException) {
                 logger.error(LogMF.format("getAuthentication", decodeException.getMessage()));
+            } catch (SignatureVerificationException signatureVerificationException) {
+                logger.error(LogMF.format("getAuthentication", signatureVerificationException.getMessage(), signatureVerificationException));
             }
         }
         return null;
