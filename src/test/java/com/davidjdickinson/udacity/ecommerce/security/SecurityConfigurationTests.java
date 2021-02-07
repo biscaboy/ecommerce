@@ -187,4 +187,42 @@ public class SecurityConfigurationTests {
         User user = userJson.parse(responseContent).getObject();
         assertEquals(userRequest.getUsername(), user.getUsername());
     }
+
+    @Test
+    public void unauthorized_request_bad_token() throws Exception {
+
+        CreateUserRequest userRequest = new CreateUserRequest();
+        userRequest.setUsername("LostMyTokenGuy");
+        userRequest.setPassword("(*&&7898adlkfBEND)");
+        userRequest.setConfirmPassword("(*&&7898adlkfBEND)");
+
+        LoginRequest loginRequest = new LoginRequest();
+        BeanUtils.copyProperties(userRequest, loginRequest);
+
+        mvc.perform(post(new URI("/api/user/create"))
+                .content(createJson.write(userRequest).getJson())
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk());
+
+        String token = mvc.perform(post(new URI("/login"))
+                .content(loginJson.write(loginRequest).getJson())
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getHeader("Authorization");
+
+        char first = token.charAt(10);
+        char replacement = (first != '0') ? '0' : '1';
+        String badToken = token.replace(first, replacement);
+
+        mvc.perform(
+                get(new URI("/api/user/" + userRequest.getUsername()))
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .header("Authorization", badToken)
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
+                        .andExpect(status().isForbidden());
+    }
 }

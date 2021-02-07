@@ -56,44 +56,44 @@ public class LogMF {
         return format(method, message, null, new HashMap<>());
     }
 
-    /**
-     *  Formats a parseable message for writing to a log.  Provides a consistent format for all logged messages.
-     *
-     * Example message:  { 'method' : 'createUser', 'message': 'username already exists', 'java.lang.String' : { 'username' : 'bobby3' } }
-     *
-     * @param method
-     * @param message
-     * @param objectType
-     * @param objectValues
-     * @return
-     */
-    private static String formatJson(String method, String message, String objectType, Map<String, String> objectValues) {
-
-        String msg;
-
-        msg = "{ \"method\" : \"" + method + "\", " +
-                        "\"message\": \"" + message + "\"";
-
-        // TODO can we just call a toString() method to write the object json?
-        if (objectType != null && !objectType.isEmpty()) {
-            msg += ", { \"" + objectType + "\" : {";
-            int count = 0;
-            for (Map.Entry entry : objectValues.entrySet()) {
-                if (count > 0)
-                    msg += ", ";
-                String key = entry.getKey().toString();
-                String value = (entry.getValue() != null) ? entry.getValue().toString() : "null";
-                msg += "\"" + key + "\" : \"" + value + "\"";
-                count++;
-            }
-
-            msg += " }";
-        }
-        msg += " }";
-
-        return msg;
-
-    }
+//    /**
+//     *  Formats a parseable message for writing to a log.  Provides a consistent format for all logged messages.
+//     *
+//     * Example message:  { 'method' : 'createUser', 'message': 'username already exists', 'java.lang.String' : { 'username' : 'bobby3' } }
+//     *
+//     * @param method
+//     * @param message
+//     * @param objectType
+//     * @param objectValues
+//     * @return
+//     */
+//    private static String formatJson(String method, String message, String objectType, Map<String, String> objectValues) {
+//
+//        String msg;
+//
+//        msg = "{ \"method\" : \"" + method + "\", " +
+//                        "\"message\": \"" + message + "\"";
+//
+//        // TODO can we just call a toString() method to write the object json?
+//        if (objectType != null && !objectType.isEmpty()) {
+//            msg += ", { \"" + objectType + "\" : {";
+//            int count = 0;
+//            for (Map.Entry entry : objectValues.entrySet()) {
+//                if (count > 0)
+//                    msg += ", ";
+//                String key = entry.getKey().toString();
+//                String value = (entry.getValue() != null) ? entry.getValue().toString() : "null";
+//                msg += "\"" + key + "\" : \"" + value + "\"";
+//                count++;
+//            }
+//
+//            msg += " }";
+//        }
+//        msg += " }";
+//
+//        return msg;
+//
+//    }
 
     private static String format(String method, String message, String objectType, Map<String, String> objectValues) {
 
