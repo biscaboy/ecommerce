@@ -48,8 +48,8 @@ The [Swagger UI](http://localhost:8081/swagger-ui.html) has been installed for v
 POST /api/user/create
 {
     "username": "newUserName",
-    "password": "P@ssw0rd",
-    "confirmPassword": "P@ssw0rd"
+    "password": "P@ssw0rd123",
+    "confirmPassword": "P@ssw0rd123"
 }
 ```
 
@@ -59,7 +59,7 @@ Upon successful login an Authorization header will be returned with the Java Web
 POST /login
 {
     "username": "newUserName",
-    "password": "P@ssw0rd"
+    "password": "P@ssw0rd123"
 }
 ```
 
@@ -101,7 +101,7 @@ GET /api/item
 
 ##### Find Item By Name
 ```
-GET /api/item/name?<item name>
+GET /api/item/name?name=<item name>
 ```
 ## Resources
 I'm grateful to these websites and authors who helped me complete this project and learn this subject matter.  I also want to give a shout out to those who curate the [Splunk Enterprise](https://docs.splunk.com/Documentation/Splunk) and [Jenkins Documentation](https://www.jenkins.io/doc/) sites as I found them both very easy to navigate and full of useful examples and tutorials.
