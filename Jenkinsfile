@@ -9,9 +9,8 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'export MAVEN_OPTS="-Xmx512M -XX:MaxPermSize=512m"'
         sh 'java -version'
-        sh 'mvn -B -DskipTests clean package'
+        sh 'export MAVEN_OPTS="-Xmx512M -XX:MaxPermSize=512m" && mvn -B -DskipTests clean package'
       }
     }
 
