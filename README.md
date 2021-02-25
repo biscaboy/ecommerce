@@ -22,7 +22,7 @@ Screenshots of Splunk searches, dashboards, alerts and triggered alerts can be f
 ```    
 #### To **Run**
 ```
-    java -jar ./target/eCommerceAuthProject-0.0.1-SNAPSHOT-spring-boot.jar
+    java -jar ./target/eCommerceAuthProject-0.0.1-SNAPSHOT.jar
 ```
 ### Accessing the API
 
